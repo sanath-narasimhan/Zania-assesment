@@ -1,0 +1,6 @@
+PyMuPDF
+openai
+nltk
+sentence-transformers
+torch
+slack_sdk
