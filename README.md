@@ -6,13 +6,13 @@ This project implements a question-answering (QA) agent designed to process PDFs
 
 ## Running Instructions
 
-Clone the Repository:
+#### Clone the Repository:
 
 ```bash
 git clone https://github.com/sanath-narasimhan/Zania-assesment.git
 ```
 
-Create a Python Environment and Install Dependencies:
+#### Create a Python Environment and Install Dependencies:
 
 Create a virtual environment using your preferred method (e.g., venv, conda).
 
@@ -24,7 +24,7 @@ Install dependencies from the requirements.txt file:
 pip install -r requirements.txt
 ```
 
-Set Environment Variables:
+#### Set Environment Variables:
 
 Use **set** for Windows and **export** for macOS/Linux.
 
@@ -41,11 +41,13 @@ OPENAI_API_KEY=<YOUR OPENAI API KEY>  # OpenAI API key (if using OpenAI models)
 OPENAI_MODEL=gpt-4o-mini         # OpenAI model to use (if using OpenAI models)
 
 ```
-Navigate to the QA_Agent Directory:
+#### Navigate to the QA_Agent Directory:
 
-```bash
-cd QA_Agent
-```
+`cd QA_Agent`
+
+#### Finally run the default code:
+
+` python app.py `
 
 ## Areas for Improvement
 
