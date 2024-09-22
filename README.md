@@ -1,35 +1,81 @@
-**Running instructions**
-Create a new python environment and install
+Zania Assessment - QA Agent
 
-Areas to improve
-Improving Word Embeddings:
-Contextualized embeddings like BERT or GPT-4 can improve the accuracy of question matching because they understand the context in which terms are used, unlike static embeddings like Word2Vec, which lacks context accountability.
-For instance, in a document, the term "termination" could refer to either "contract termination" or "employee termination." Contextual embeddings can help disambiguate the meaning based on the surrounding context.
-Fine-tuning embeddings: Fine-tuning embeddings on a specific dataset relevant to the domain (e.g., HR policies, legal documents) can lead to better matches because the model will understand specific terminology better.
-Using Knowledge Graphs:
-Semantic Relations: Knowledge graphs can map relationships between entities (like "CEO" → "Executive Leader" or "leave policy" → "vacation policy"), which can help the agent return more accurate answers even when the wording doesn't match exactly.
-Answer Inference: Knowledge graphs enable better inference about related concepts. For example, if the document mentions "John Doe" as the company's " President, " a knowledge graph could infer that this person is likely the CEO if no explicit mention is made.
-Ontology Support: By linking documents to a predefined ontology, the agent can resolve ambiguities and provide structured answers when dealing with complex documents.
-Improve the Confidence Metric:
-Use ensemble methods (combining results from different models, like keyword-based and embedding-based retrieval) to increase confidence.
-Confidence Calibration: Implement a mechanism to calibrate confidence scores based on the quality and structure of the document (e.g., using thresholds that adapt based on document size, type of content, etc.).
-More Sophisticated Parsing:
-Use an OCR preprocessing step for scanned PDFs to ensure accurate text extraction.
-Improve the text processing by detecting document structure (e.g., headings, bullet points) to provide more accurate paragraph-based chunking and matching.
-Modularization and production level improvements
+Project Description
+
+This project implements a question-answering (QA) agent designed to process PDFs and answer user queries about their content. It leverages various techniques to enhance accuracy and reliability.
+
+Running Instructions
+
+Clone the Repository:
+
+Bash
+git clone https://github.com/sanath-narasimhan/Zania-assesment.git
+
+Create a Python Environment and Install Dependencies:
+
+Create a virtual environment using your preferred method (e.g., venv, conda).
+
+Activate the environment.
+
+Install dependencies from the requirements.txt file:
+
+Bash
+pip install -r requirements.txt
+
+Set Environment Variables:
+
+Use set for Windows and export for macOS/Linux.
+
+Define the following environment variables, replacing placeholders with your actual values:
+
+EMBEDDING_MODEL=all-MiniLM-L6-v2  # Embedding model to use (e.g., for contextualized embeddings)
+SIMILARITY_THRESHOLD=0.7        # Minimum similarity score for considering a question match
+SLACK_TOKEN=<YOUR SLACK BOT TOKEN>  # Slack bot token for sending notifications
+SLACK_CHANNEL=<CHANNEL YOU WANT TO POST TO>  # Slack channel for notifications
+LOG_LEVEL=INFO                  # Logging level (e.g., DEBUG, INFO, WARNING, ERROR)
+OPENAI_API_KEY=<YOUR OPENAI API KEY>  # OpenAI API key (if using OpenAI models)
+OPENAI_MODEL=gpt-4o-mini         # OpenAI model to use (if using OpenAI models)
+Navigate to the QA_Agent Directory:
+
+Bash
+cd QA_Agent
+Use code with caution.
+
+Areas for Improvement
+
+Word Embeddings:
+
+Employ contextualized embeddings like BERT or GPT-4 for enhanced context understanding.
+Fine-tune embeddings on domain-specific datasets (e.g., HR policies, legal documents) for improved term recognition.
+Knowledge Graphs:
+
+Leverage knowledge graphs to represent relationships between entities and answer questions even with slight wording variations.
+Enable answer inference based on semantic relations from the knowledge graph.
+Support ontologies to address ambiguities and provide structured answers for complex documents.
+Confidence Metric:
+
+Utilize ensemble methods to aggregate results from different models (keyword-based, embedding-based) for more robust confidence scores.
+Implement confidence calibration based on document quality and structure (e.g., size, content type, using adaptive thresholds).
+Parsing:
+
+Include an OCR preprocessing step for scanned PDFs to ensure accurate text extraction.
+Improve text processing by recognizing document structure (headings, bullet points) for precise paragraph-based chunking and matching.
+Modularization and Production-Level Enhancements:
 
 Scalability:
-Asynchronous Processing: If dealing with large PDFs or multiple requests, process requests asynchronously using Python's asyncio or worker threads for better scalability.
-Batch Processing: Allow the system to batch process multiple documents and questions, improving throughput in high-traffic situations (e.g., using a task queue like Celery).
-Cloud Storage and Caching: Store PDFs and their parsed text in a persistent database or cache (like Redis) to avoid redundant parsing and improve performance.
-Microservices Architecture: Break the solution into independent services such as a PDF extraction service, a question-answering service, and a Slack integration service. This makes it easier to scale each part independently.
+
+Implement asynchronous processing for handling large PDFs or multiple requests using asyncio or worker threads.
+Enable batch processing for multiple documents and questions using a task queue like Celery to optimize performance.
+Utilize cloud storage and caching (e.g., Redis) to store PDFs and parsed text, avoiding redundant parsing.
+Consider a microservices architecture, dividing the solution into independent services (PDF extraction, QA, Slack integration) for easier scaling.
 Production-Grade Improvements:
-Error Handling: Make the system more fault-tolerant by adding error handling for network failures, failed extractions, and missing or invalid questions. Ensure that any user-visible issues, like failed Slack messages, are gracefully handled.
-Testing: Implement thorough unit and integration testing:
+
+Introduce comprehensive error handling to address network failures, extraction issues, and invalid questions or data.
+Implement thorough unit and integration testing:
 Unit tests for each module.
-Mocking the Slack API to test Slack interactions.
-Integration tests to verify that the end-to-end flow (from PDF parsing to Slack message) works correctly.
-Containerization: Use Docker to package the entire solution into a container for easier deployment in different environments (local, staging, production).
-CI/CD Pipelines: Set up automated pipelines using GitHub Actions, CircleCI, or Jenkins to run tests and deploy the app continuously.
-Version Control for Models: If fine-tuned models are used, consider versioning them and hosting them using a platform like Hugging Face Model Hub or in-house MLflow servers.
-Monitoring: Implement real-time monitoring and alerts for system performance (e.g., using Prometheus and Grafana). Track response times and failures to ensure the system is functioning optimally in production
+Mock the Slack API to test interactions.
+Integration tests for the entire flow (PDF parsing to Slack message).
+Containerize the solution using Docker for simplified deployment across environments.
+Establish automated CI/CD pipelines (e.g., GitHub Actions, CircleCI) for continuous testing and deployment.
+Manage and version control fine-tuned models using platforms like Hugging Face Model Hub or MLflow servers (if applicable).
+Implement real-time monitoring and alerts for system performance (e.g., with Prometheus and Grafana) to track response times and failures.
