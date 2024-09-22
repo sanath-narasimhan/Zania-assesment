@@ -53,19 +53,19 @@ OPENAI_MODEL=gpt-4o-mini         # OpenAI model to use (if using OpenAI models)
 
 ### Word Embeddings:
 
-Employ contextualized embeddings like BERT or GPT-4 for enhanced context understanding.
+- Employ contextualized embeddings like BERT or GPT-4 for enhanced context understanding.
 Fine-tune embeddings on domain-specific datasets (e.g., HR policies, legal documents) for improved term recognition.
 
 ### Knowledge Graphs:
 
-Leverage knowledge graphs to represent relationships between entities and answer questions even with slight wording variations.
-Enable answer inference based on semantic relations from the knowledge graph.
-Support ontologies to address ambiguities and provide structured answers for complex documents.
+- Leverage knowledge graphs to represent relationships between entities and answer questions even with slight wording variations.
+- Enable answer inference based on semantic relations from the knowledge graph.
+- Support ontologies to address ambiguities and provide structured answers for complex documents.
 
 ### Confidence Metric:
 
-Utilize ensemble methods to aggregate results from different models (keyword-based, embedding-based) for more robust confidence scores.
-Implement confidence calibration based on document quality and structure (e.g., size, content type, using adaptive thresholds).
+- Utilize ensemble methods to aggregate results from different models (keyword-based, embedding-based) for more robust confidence scores.
+- Implement confidence calibration based on document quality and structure (e.g., size, content type, using adaptive thresholds).
 
 ### Parsing:
 
