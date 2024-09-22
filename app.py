@@ -99,7 +99,7 @@ def process_questions_and_post_to_slack(pdf_path, questions):
             return
 
         #  Answer each question and prepare a response message
-        response_message = ""
+        response_message = "{"
         for question in questions:
             relevant_paragraph = retriever.find_relevant_paragraphs_w2w(question, paragraphs)
             if relevant_paragraph == "Data Not Available":
@@ -107,12 +107,13 @@ def process_questions_and_post_to_slack(pdf_path, questions):
 
             if relevant_paragraph != "Data Not Available":
                 answer = generate_answer_with_openai(question,relevant_paragraph)
-                response_message += f"Q: {question}\nA: {answer}\n\n"
+                response_message += f"\"{question}\" : \"{answer}\",\n"
             else:
-                response_message += f"Q: {question}\nA: Data Not Available\n\n"
+                response_message += f"\"{question}\" : \"Data Not Available\",\n"
+        #response_message[-1] = "}"
 
         #  Post the results on Slack
-        slack_client.post_message(response_message)
+        slack_client.post_message(response_message[:-1] + "}")
 
     except Exception as e:
         logger.error(f"An error occurred: {e}")
