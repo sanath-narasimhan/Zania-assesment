@@ -23,17 +23,17 @@ class TextRetriever:
             str: The most relevant paragraph or "Data Not Available" if none are relevant.
         """
         try:
-            # Step 1: Extract keywords from the question (words longer than 3 characters)
+            # Extract keywords from the question (words longer than 3 characters)
             question_keywords = [word for word in re.findall(r'\b\w{4,}\b', question.lower())]
 
-            # Step 2: Search for relevant paragraphs containing any of the question keywords
+            # Search for relevant paragraphs containing any of the question keywords
             relevant_paragraphs = []
             for paragraph in paragraphs:
                 paragraph_lower = paragraph.lower()
                 if any(keyword in paragraph_lower for keyword in question_keywords):
                     relevant_paragraphs.append(paragraph)
 
-            # Step 3: Return the paragraph with the highest number of keyword matches
+            # Return the paragraph with the highest number of keyword matches
             if relevant_paragraphs:
                 # Optionally, you could rank by number of matches
                 sorted_paragraphs = sorted(relevant_paragraphs, key=lambda p: sum(k in p.lower() for k in question_keywords), reverse=True)
@@ -57,20 +57,20 @@ class TextRetriever:
             str: The most relevant paragraph or "Data Not Available" if none are relevant.
         """
         try:
-            # Step 1: Generate embeddings for the question and the paragraphs
+            # Generate embeddings for the question and the paragraphs
             question_embedding = self.embedding_model.generate_embeddings([question])
             paragraph_embeddings = self.embedding_model.generate_embeddings(paragraphs)
 
-            # Step 2: Compute cosine similarity between question and each paragraph
+            # Compute cosine similarity between question and each paragraph
             cosine_scores = util.pytorch_cos_sim(question_embedding, paragraph_embeddings)[0]
 
-            # Step 3: Retrieve paragraphs with similarity above the threshold
+            # Retrieve paragraphs with similarity above the threshold
             relevant_paragraphs = []
             for i, score in enumerate(cosine_scores):
                 if score > Config.SIMILARITY_THRESHOLD:
                     relevant_paragraphs.append((paragraphs[i], score.item()))
 
-            # Step 4: Return the highest scoring relevant paragraph or "Data Not Available"
+            # Return the highest scoring relevant paragraph or "Data Not Available"
             if relevant_paragraphs:
                 relevant_paragraphs = sorted(relevant_paragraphs, key=lambda x: x[1], reverse=True)
                 return relevant_paragraphs[0][0]  # Return the top-scoring paragraph

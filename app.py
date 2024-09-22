@@ -87,7 +87,7 @@ def process_questions_and_post_to_slack(pdf_path, questions):
         # Extract text from the PDF
         document_text = extract_text_from_pdf(pdf_path)
 
-        # Step 2: Initialize TextProcessor and TextRetriever
+        # Initialize TextProcessor and TextRetriever
         processor = TextProcessor()
         retriever = TextRetriever()
         slack_client = SlackClient()
@@ -110,7 +110,7 @@ def process_questions_and_post_to_slack(pdf_path, questions):
                 response_message += f"\"{question}\" : \"{answer}\",\n"
             else:
                 response_message += f"\"{question}\" : \"Data Not Available\",\n"
-        #response_message[-1] = "}"
+       
 
         #  Post the results on Slack
         slack_client.post_message(response_message[:-1] + "}")
