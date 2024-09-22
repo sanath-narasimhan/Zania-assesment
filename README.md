@@ -1,15 +1,16 @@
-Zania Assessment - QA Agent
+# Zania Assessment - QA Agent
 
-Project Description
+## Project Description
 
 This project implements a question-answering (QA) agent designed to process PDFs and answer user queries about their content. It leverages various techniques to enhance accuracy and reliability.
 
-Running Instructions
+## Running Instructions
 
 Clone the Repository:
 
-Bash
+```bash
 git clone https://github.com/sanath-narasimhan/Zania-assesment.git
+```
 
 Create a Python Environment and Install Dependencies:
 
@@ -19,12 +20,14 @@ Activate the environment.
 
 Install dependencies from the requirements.txt file:
 
-Bash
+```bash
 pip install -r requirements.txt
+```
 
 Set Environment Variables:
 
-Use set for Windows and export for macOS/Linux.
+```bash
+Use **set** for Windows and export for macOS/Linux.
 
 Define the following environment variables, replacing placeholders with your actual values:
 
@@ -37,38 +40,41 @@ OPENAI_API_KEY=<YOUR OPENAI API KEY>  # OpenAI API key (if using OpenAI models)
 OPENAI_MODEL=gpt-4o-mini         # OpenAI model to use (if using OpenAI models)
 Navigate to the QA_Agent Directory:
 
-Bash
 cd QA_Agent
-Use code with caution.
+```
 
-Areas for Improvement
+## Areas for Improvement
 
-Word Embeddings:
+### Word Embeddings:
 
 Employ contextualized embeddings like BERT or GPT-4 for enhanced context understanding.
 Fine-tune embeddings on domain-specific datasets (e.g., HR policies, legal documents) for improved term recognition.
-Knowledge Graphs:
+
+### Knowledge Graphs:
 
 Leverage knowledge graphs to represent relationships between entities and answer questions even with slight wording variations.
 Enable answer inference based on semantic relations from the knowledge graph.
 Support ontologies to address ambiguities and provide structured answers for complex documents.
-Confidence Metric:
+
+### Confidence Metric:
 
 Utilize ensemble methods to aggregate results from different models (keyword-based, embedding-based) for more robust confidence scores.
 Implement confidence calibration based on document quality and structure (e.g., size, content type, using adaptive thresholds).
-Parsing:
+
+### Parsing:
 
 Include an OCR preprocessing step for scanned PDFs to ensure accurate text extraction.
 Improve text processing by recognizing document structure (headings, bullet points) for precise paragraph-based chunking and matching.
 Modularization and Production-Level Enhancements:
 
-Scalability:
+### Scalability:
 
 Implement asynchronous processing for handling large PDFs or multiple requests using asyncio or worker threads.
 Enable batch processing for multiple documents and questions using a task queue like Celery to optimize performance.
 Utilize cloud storage and caching (e.g., Redis) to store PDFs and parsed text, avoiding redundant parsing.
 Consider a microservices architecture, dividing the solution into independent services (PDF extraction, QA, Slack integration) for easier scaling.
-Production-Grade Improvements:
+
+## Production-Grade Improvements:
 
 Introduce comprehensive error handling to address network failures, extraction issues, and invalid questions or data.
 Implement thorough unit and integration testing:
