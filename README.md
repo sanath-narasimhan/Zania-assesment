@@ -4,6 +4,10 @@
 
 This project implements a question-answering (QA) agent designed to process PDFs and answer user queries about their content. It leverages various techniques to enhance accuracy and reliability.
 
+#### Sample run with **handbook.pdf**
+
+[Test Run](https://drive.google.com/file/d/13uT2tAys0uXGwVEGNnUNrAy2A_cd6luD/view?usp=sharing)
+
 ## Running Instructions
 
 #### Clone the Repository:
